@@ -18,11 +18,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <fragment
-        android:name="com.example.fragments.fragments.BasicFragment"
-        android:id="@+id/fragment"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/frameLayout">
+        </FrameLayout>
+
 
 
 </LinearLayout>

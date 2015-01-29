@@ -4,7 +4,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+
+import com.example.fragments.fragments.BasicFragment;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -15,14 +18,30 @@ public class MainActivity extends ActionBarActivity {
    private void setup(){
        button1 = (Button) findViewById(R.id.button1);
        button2 = (Button) findViewById(R.id.button2);
-
    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         setup();
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.frameLayout, new BasicFragment(false)).commit();
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.frameLayout, new BasicFragment(true)).commit();
+            }
+        });
+
+
     }
 
 
