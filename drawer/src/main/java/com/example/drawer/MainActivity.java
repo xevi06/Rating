@@ -2,6 +2,7 @@ package com.example.drawer;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -16,10 +17,11 @@ import com.example.drawer.fragments.BasicFragment;
 
 
 public class MainActivity extends ActionBarActivity {
-
     private String[] leftMenuItems
             = new String[]{"Main", "Top", "Flamers"};
     private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle; //v4
+
     private ListView listView;
 
     @Override
@@ -28,6 +30,20 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                R.drawable.ic_drawer,
+                R.string.open,
+                R.string.close
+        ){
+
+        };
+        drawerLayout.setDrawerListener(mDrawerToggle);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         listView = (ListView) findViewById(R.id.left_drawer);
         listView.setAdapter(
                 new ArrayAdapter<String>(
@@ -42,21 +58,25 @@ public class MainActivity extends ActionBarActivity {
             }
         });
     }
-    /** Swaps fragments in the main content view */
+
+    /**
+     * Swaps fragments in the main content view
+     */
     private void selectItem(int position) {
         // Create a new fragment and specify the planet to show based on position
         Fragment fragment;
         switch (position) {
             case 0:
-                fragment = new BasicFragment(false);
+                fragment = new BasicFragment(true);
                 break;
             case 1:
-                fragment = new BasicFragment(true);
+                fragment = new BasicFragment(false);
                 break;
             default:
                 fragment = new BasicFragment(true);
         }
 
+        // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
@@ -70,7 +90,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void setTitle(CharSequence title) {
-         //getActionBar().setTitle(title.subSequence(0, 2));
+        //getActionBar().setTitle(title.subSequence(0, 2));
     }
 
 
