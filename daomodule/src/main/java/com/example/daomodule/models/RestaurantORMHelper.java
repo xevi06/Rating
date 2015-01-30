@@ -26,9 +26,19 @@ public class RestaurantORMHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
             Log.i("RestaurantORMHelper","onCreate");
-            TableUtils.createTable(connectionSource, RestaurantORMDao.class);
+            TableUtils.createTable(connectionSource, RestaurantORMDao.class);//creem la taulaamb les columnes de la clase
         } catch (SQLException e) {
             Log.e("ORM Error","onCreate Error");
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int i, int i2) {
+        try{
+            TableUtils.dropTable(connectionSource,RestaurantORMDao.class,true);
+
+        } catch (SQLException e) {
             throw new RuntimeException();
         }
     }
