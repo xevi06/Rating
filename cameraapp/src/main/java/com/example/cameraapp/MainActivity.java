@@ -1,6 +1,7 @@
 package com.example.cameraapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,12 +11,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.util.Random;
+
 
 public class MainActivity extends ActionBarActivity {
 
     private Button camera;
     private ImageView foto;
     static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            Bundle extras = data.getExtras();
+            Bitmap imagebitmap = (Bitmap) extras.get("data");
+            foto.setImageBitmap(imagebitmap);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +46,7 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
+
 
     }
 
