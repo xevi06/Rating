@@ -49,5 +49,10 @@ public class RestaurantORMDao {
     public void setType(String type) {
         this.type = type;
     }
+    public RestaurantORMDao(String name, int rate, String type){
+        this.name = name;
+        this.rate = rate;
+        this.type = type;
+    }
 
 }
