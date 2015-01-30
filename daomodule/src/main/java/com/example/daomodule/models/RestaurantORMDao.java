@@ -4,13 +4,13 @@ package com.example.daomodule.models;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "RestaurantORMDao")
+@DatabaseTable(tableName = "RESTAURANTSORM")
 
 /**
  * Created by Xevi on 30/01/2015.
  */
 public class RestaurantORMDao {
-    @DatabaseField(generatedId = true);
+    @DatabaseField(generatedId = true)
     private int id;
     @DatabaseField
     private String name;
