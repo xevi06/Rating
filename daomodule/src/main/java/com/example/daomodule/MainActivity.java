@@ -1,5 +1,7 @@
 package com.example.daomodule;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,15 +96,46 @@ public class MainActivity extends OrmLiteBaseActivity<RestaurantORMHelper> {
         borrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    TableUtils.clearTable(getConnectionSource(),RestaurantORMDao.class);
-                } catch (SQLException e) {
-                    throw new RuntimeException();
-                }
-                llista.setText("BD Borrada");
+                new AlertDialog.Builder(getApplicationContext())
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Cleaning BD")
+                        .setMessage("Are you sure you want to clean this BD?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-            }
+                                try{
+                                    TableUtils.clearTable(getConnectionSource(),RestaurantORMDao.class);
+                                } catch (SQLException e) {
+                                    throw new RuntimeException();
+                                }
+                                llista.setText("BD Borrada");
+                            }
+
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+                }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Closing Activity")
+                .setMessage("Are you sure you want to close this activity?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
 }
