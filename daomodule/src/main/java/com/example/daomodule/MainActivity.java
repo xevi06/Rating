@@ -2,6 +2,7 @@ package com.example.daomodule;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,8 +14,10 @@ import com.example.daomodule.models.RestaurantORMDao;
 import com.example.daomodule.models.RestaurantORMHelper;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Random;
 
 
@@ -22,6 +25,7 @@ public class MainActivity extends OrmLiteBaseActivity<RestaurantORMHelper> {
 
     private Button llegir;
     private Button escriure;
+    private Button borrar;
     private TextView llista;
 
     @Override
@@ -31,6 +35,7 @@ public class MainActivity extends OrmLiteBaseActivity<RestaurantORMHelper> {
 
         llegir = (Button) findViewById(R.id.llegir);
         escriure = (Button) findViewById(R.id.guardar);
+        borrar = (Button) findViewById(R.id.borrar);
         llista = (TextView) findViewById(R.id.llista);
 
         escriure.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +75,31 @@ public class MainActivity extends OrmLiteBaseActivity<RestaurantORMHelper> {
         llegir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                    String frase = "";
+                    try{
+                        Dao<RestaurantORMDao,Integer> restaurantDao = getHelper().getDao();
+                        List<RestaurantORMDao> llistaa = restaurantDao.queryForAll();
+                        frase += "Numero de Restaurants: " + llistaa.size() + "\n";
+                        for(RestaurantORMDao rest : llistaa){
+                            frase += rest.getName() + " " + rest.getRate() + " " + rest.getType() + "\n";
+                        }
+
+                        llista.setText(frase);
+
+                    } catch (SQLException e) {
+                        Log.i("OnCreate", "Exception");
+                    }
+            }
+        });
+        borrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    TableUtils.clearTable(getConnectionSource(),RestaurantORMDao.class);
+                } catch (SQLException e) {
+                    throw new RuntimeException();
+                }
+                llista.setText("BD Borrada");
 
             }
         });

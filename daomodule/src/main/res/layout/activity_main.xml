@@ -18,7 +18,12 @@
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/llegir"
-            android:text="Llegir"
+            android:text="Llegir BD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/borrar"
+            android:text="Borrar BD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
