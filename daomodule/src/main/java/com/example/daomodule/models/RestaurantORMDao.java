@@ -4,6 +4,8 @@ package com.example.daomodule.models;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+@DatabaseTable(tableName = "RestaurantORMDao")
+
 /**
  * Created by Xevi on 30/01/2015.
  */
