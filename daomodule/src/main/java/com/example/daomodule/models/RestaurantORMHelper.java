@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class RestaurantORMHelper extends OrmLiteSqliteOpenHelper {
     private static final int DATABASE_VERSION = 15;
-    private Dao<RestaurantORMDao,Integer> restaurantORMDao;
+    private Dao<RestaurantORMDao,Integer> restaurantDao;
 
     public RestaurantORMHelper(Context context){
         super(context,"RESTAURANTS_ORM.db",null,DATABASE_VERSION);
@@ -41,5 +41,10 @@ public class RestaurantORMHelper extends OrmLiteSqliteOpenHelper {
         } catch (SQLException e) {
             throw new RuntimeException();
         }
+    }
+
+    public Dao<RestaurantORMDao, Integer> getDao() throws SQLException {
+        restaurantDao = super.getDao(RestaurantORMDao.class);
+        return restaurantDao;
     }
 }
