@@ -96,28 +96,58 @@ public class MainActivity extends OrmLiteBaseActivity<RestaurantORMHelper> {
         borrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(getApplicationContext())
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Cleaning BD")
-                        .setMessage("Are you sure you want to clean this BD?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                        {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
 
-                                try{
-                                    TableUtils.clearTable(getConnectionSource(),RestaurantORMDao.class);
-                                } catch (SQLException e) {
-                                    throw new RuntimeException();
-                                }
-                                llista.setText("BD Borrada");
-                            }
-
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
+                try {
+                    TableUtils.clearTable(getConnectionSource(), RestaurantORMDao.class);
+                } catch (SQLException e) {
+                    throw new RuntimeException();
                 }
-        });
+                llista.setText("BD Borrada");
+            }/*
+
+            new AlertDialog.Builder(
+
+            getApplicationContext()
+
+            )
+                    .
+
+            setIcon(android.R.drawable.ic_dialog_alert)
+
+            .
+
+            setTitle("Cleaning BD")
+
+            .
+
+            setMessage("Are you sure you want to clean this BD?")
+
+            .
+
+            setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick (DialogInterface dialog,int which){
+
+                    try {
+                        TableUtils.clearTable(getConnectionSource(), RestaurantORMDao.class);
+                    } catch (SQLException e) {
+                        throw new RuntimeException();
+                    }
+                    llista.setText("BD Borrada");
+                }
+
+            }
+
+            )
+                    .
+
+            setNegativeButton("No",null)
+
+            .
+
+            show();
+        }*/
+    });
     }
 
     @Override
