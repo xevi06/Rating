@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.parse_twit" >
+    package="com.example.inlab.jsoup" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,14 +18,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".SingupActivity"
-            android:label="@string/title_activity_singup" >
-        </activity>
-        <activity
-            android:name=".InfoActivity"
-            android:label="@string/title_activity_info" >
         </activity>
     </application>
 
